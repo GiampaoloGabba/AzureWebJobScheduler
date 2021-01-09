@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 
 namespace AzureLetsEncryptRenewerScheduler
@@ -36,6 +35,8 @@ namespace AzureLetsEncryptRenewerScheduler
             if (!response.IsSuccessStatusCode)
             {
                 //Alert
+                log.LogError($"Ricevuto un codice di errore dalla richiesta letsencrypt ({response.StatusCode})");
+                log.LogError(response.ReasonPhrase);
             }
         }
     }
